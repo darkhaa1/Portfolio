@@ -17,7 +17,7 @@ export function Nav() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="font-mono text-lg font-semibold">
-          <span className="text-accent">~/</span>darkhaa
+          <span className="text-accent">~/</span>Darkhansukh
         </a>
 
         <div className="hidden items-center gap-6 md:flex">

@@ -65,7 +65,7 @@ export const infraBadges = [
 
 export const infraRepo = {
   label: "tusch-infra",
-  url: "https://github.com/darkhaa/tusch-infra",
+  url: "https://github.com/darkhaa1/tusch-infra",
 };
 
 export const projet = {
@@ -120,41 +120,25 @@ export const competences = {
   },
 };
 
-export const parcours = [
-  {
-    period: "2024 – 2025",
-    title: "Formation TSSR",
-    description: "Titre professionnel Technicien Supérieur Systèmes et Réseaux",
-  },
-  {
-    period: "2025 – 2026",
-    title: "Projet tusch.mn",
-    description:
-      "Conception et déploiement complet d'une marketplace — infrastructure auto-hébergée en production",
-  },
-  {
-    period: "Sept. 2026",
-    title: "Alternance AIS",
-    description:
-      "Recherche d'alternance Administrateur d'Infrastructures Sécurisées — région Saint-Étienne",
-  },
-];
-
 export const contact = {
   availability:
     "Disponible pour une alternance AIS à partir de septembre 2026 — région Saint-Étienne",
   links: {
     linkedin: {
       label: "LinkedIn",
-      url: "https://linkedin.com/in/darkhansukh",
+      url: "https://www.linkedin.com/in/darkhansukh-ganburel-7398a5311/",
     },
     github: {
       label: "GitHub",
-      url: "https://github.com/darkhaa",
+      url: "https://github.com/darkhaa1",
     },
     email: {
       label: "g.darhansuh@gmail.com",
       url: "mailto:g.darhansuh@gmail.com",
+    },
+    telephone: {
+      label: "+33 7 69 69 60 42",
+      url: "tel:+33769696042",
     },
   },
 };
