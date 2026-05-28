@@ -3,11 +3,10 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/content";
-import { getInfraStatus } from "@/lib/infra-status";
+import { InfraStatus } from "@/components/InfraStatus";
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const status = getInfraStatus();
 
   return (
     <nav
@@ -21,15 +20,7 @@ export function Nav() {
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
-          <span className="flex items-center gap-2 font-mono text-xs text-text-muted">
-            <span className="relative flex h-2 w-2">
-              {status.online && (
-                <span className="absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75 animate-pulse-dot" />
-              )}
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-green" />
-            </span>
-            infra: online · {status.uptime}
-          </span>
+          <InfraStatus />
 
           {navLinks.map((link) => (
             <a
@@ -63,15 +54,7 @@ export function Nav() {
       {mobileOpen && (
         <div className="border-t border-border bg-bg-darker md:hidden">
           <div className="flex flex-col gap-1 px-4 py-4">
-            <span className="mb-2 flex items-center gap-2 font-mono text-xs text-text-muted">
-              <span className="relative flex h-2 w-2">
-                {status.online && (
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75 animate-pulse-dot" />
-                )}
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-green" />
-              </span>
-              infra: online · {status.uptime}
-            </span>
+            <InfraStatus className="mb-2" />
             {navLinks.map((link) => (
               <a
                 key={link.href}
