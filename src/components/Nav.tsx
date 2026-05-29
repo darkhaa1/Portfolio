@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/content";
-import { InfraStatus } from "@/components/InfraStatus";
+import { StatusIndicator } from "@/components/status/StatusIndicator";
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,7 +20,7 @@ export function Nav() {
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
-          <InfraStatus />
+          <StatusIndicator />
 
           {navLinks.map((link) => (
             <a
@@ -54,7 +54,7 @@ export function Nav() {
       {mobileOpen && (
         <div className="border-t border-border bg-bg-darker md:hidden">
           <div className="flex flex-col gap-1 px-4 py-4">
-            <InfraStatus className="mb-2" />
+            <StatusIndicator className="mb-2" />
             {navLinks.map((link) => (
               <a
                 key={link.href}

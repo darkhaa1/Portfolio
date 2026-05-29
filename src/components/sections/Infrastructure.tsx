@@ -2,6 +2,7 @@
 
 import { Shield, ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { StatusPanel } from "@/components/status/StatusPanel";
 import { infraLayers, infraBadges, infraRepo } from "@/lib/content";
 
 function LayerCard({
@@ -36,6 +37,8 @@ export function Infrastructure() {
   return (
     <section id="infrastructure" className="scroll-mt-nav px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-4xl">
+        <StatusPanel className="mb-8 lg:mb-0" />
+
         <SectionHeading number="02" title="Infrastructure" />
 
         <p className="mb-8 text-text-muted">

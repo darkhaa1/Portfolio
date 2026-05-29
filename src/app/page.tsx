@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="lg:pr-88">
         <Hero />
         <Infrastructure />
         <Projet />
