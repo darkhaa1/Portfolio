@@ -136,8 +136,8 @@ export const contact = {
       href: "https://github.com/darkhaa1",
     },
     linkedin: {
-      value: "linkedin.com/in/darkhansukh-ganburel-7398a5311",
-      href: "https://www.linkedin.com/in/darkhansukh-ganburel-7398a5311/",
+      value: "linkedin.com/in/darkhansukh",
+      href: "https://www.linkedin.com/in/darkhansukh/",
     },
     phone: {
       value: "+33 7 69 69 60 42",
