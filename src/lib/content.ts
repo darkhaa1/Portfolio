@@ -64,6 +64,9 @@ export const infraBadges = [
 ];
 
 export const infraRepo = {
+  intro:
+    "J'ai documenté toute la mise en place de cette infrastructure — choix techniques, configurations anonymisées, pièges rencontrés et résolus. Le tout est public sur GitHub.",
+  cta: "Explorer le dépôt →",
   label: "tusch-infra",
   url: "https://github.com/darkhaa1/tusch-infra",
 };
@@ -124,21 +127,21 @@ export const contact = {
   availability:
     "Disponible pour une alternance AIS à partir de septembre 2026 — région Saint-Étienne",
   links: {
-    linkedin: {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/in/darkhansukh-ganburel-7398a5311/",
+    email: {
+      value: "g.darhansuh@gmail.com",
+      href: "mailto:g.darhansuh@gmail.com",
     },
     github: {
-      label: "GitHub",
-      url: "https://github.com/darkhaa1",
+      value: "github.com/darkhaa1",
+      href: "https://github.com/darkhaa1",
     },
-    email: {
-      label: "g.darhansuh@gmail.com",
-      url: "mailto:g.darhansuh@gmail.com",
+    linkedin: {
+      value: "linkedin.com/in/darkhansukh-ganburel-7398a5311",
+      href: "https://www.linkedin.com/in/darkhansukh-ganburel-7398a5311/",
     },
-    telephone: {
-      label: "+33 7 69 69 60 42",
-      url: "tel:+33769696042",
+    phone: {
+      value: "+33 7 69 69 60 42",
+      href: "tel:+33769696042",
     },
   },
 };
