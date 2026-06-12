@@ -1,4 +1,5 @@
-import { Server, ArrowDown, Mail } from "lucide-react";
+import Link from "next/link";
+import { Server, ArrowRight, Mail } from "lucide-react";
 import { hero } from "@/lib/content";
 
 export function Hero() {
@@ -30,13 +31,13 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <a
-            href="#infrastructure"
+          <Link
+            href="/infrastructure"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-bg-primary transition-colors hover:bg-accent-light"
           >
-            <ArrowDown size={18} />
+            <ArrowRight size={18} />
             Voir mon infrastructure
-          </a>
+          </Link>
           <a
             href="#contact"
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"

@@ -1,37 +1,8 @@
-"use client";
-
-import { Shield, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusPanel } from "@/components/status/StatusPanel";
-import { infraLayers, infraBadges, infraRepo } from "@/lib/content";
-
-function LayerCard({
-  number,
-  name,
-  details,
-}: {
-  number: string;
-  name: string;
-  details: string;
-}) {
-  return (
-    <div className="group relative flex items-center gap-4 rounded-lg border border-border bg-surface px-5 py-4 transition-all duration-200 hover:border-accent hover:bg-accent/5 hover:shadow-[0_0_20px_rgba(56,189,248,0.08)]">
-      <span className="font-mono text-sm text-text-hint transition-colors group-hover:text-accent">
-        {number}
-      </span>
-      <div className="flex-1">
-        <span className="font-semibold text-text-primary transition-colors group-hover:text-accent">
-          {name}
-        </span>
-        <span className="ml-2 text-sm text-text-muted">{details}</span>
-      </div>
-      <Shield
-        size={18}
-        className="text-text-faint transition-colors group-hover:text-accent"
-      />
-    </div>
-  );
-}
+import { infraTeaser, infraBadges } from "@/lib/content";
 
 export function Infrastructure() {
   return (
@@ -41,54 +12,35 @@ export function Infrastructure() {
 
         <SectionHeading number="02" title="Infrastructure" />
 
-        <p className="mb-8 text-text-muted">
-          Défense en profondeur — survole une couche
+        <p className="max-w-2xl text-lg leading-relaxed text-text-muted">
+          {infraTeaser.lead}
         </p>
 
-        <div className="flex flex-col gap-3">
-          {infraLayers.map((layer) => (
-            <LayerCard key={layer.number} {...layer} />
-          ))}
-        </div>
-
-        <div className="mt-10 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           {infraBadges.map((badge) => (
             <span
               key={badge.label}
-              className={`rounded-md border px-3 py-1 font-mono text-xs ${badge.variant === "teal"
+              className={`rounded-md border px-3 py-1 font-mono text-xs ${
+                badge.variant === "teal"
                   ? "border-accent-teal/30 bg-accent-teal/10 text-accent-teal"
                   : "border-border bg-bg-subtle text-text-muted"
-                }`}
+              }`}
             >
               {badge.label}
             </span>
           ))}
         </div>
 
-        <div className="mt-10 max-w-2xl">
-          <p className="leading-relaxed text-text-muted">{infraRepo.intro}</p>
-          <div className="mt-4 flex flex-wrap items-center gap-4">
-            <a
-              href={infraRepo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center font-mono text-sm font-medium text-accent transition-colors hover:text-accent-light"
-              aria-label="Explorer le dépôt GitHub tusch-infra (nouvel onglet)"
-            >
-              {infraRepo.cta}
-            </a>
-            <a
-              href={infraRepo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 font-mono text-sm text-text-primary transition-colors hover:border-accent hover:text-accent"
-              aria-label={`Voir le dépôt GitHub ${infraRepo.label}`}
-            >
-              <ExternalLink size={16} />
-              {infraRepo.label}
-            </a>
-          </div>
-        </div>
+        <Link
+          href={infraTeaser.href}
+          className="group mt-10 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-bg-primary transition-colors hover:bg-accent-light"
+        >
+          {infraTeaser.cta}
+          <ArrowRight
+            size={18}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </Link>
       </div>
     </section>
   );
