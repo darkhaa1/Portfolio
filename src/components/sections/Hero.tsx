@@ -21,7 +21,7 @@ export function Hero() {
 
         <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
           {hero.headline}
-          <span className="ml-1 inline-block w-[3px] bg-accent align-baseline animate-blink">
+          <span className="ml-1 inline-block w-0.75 bg-accent align-baseline animate-blink">
             &nbsp;
           </span>
         </h1>

@@ -9,7 +9,7 @@ export interface ParcoursEntry {
   bullets?: string[];
 }
 
-export const cvUrl = "/CV_Darkhansukh_Ganburel.pdf";
+export const cvUrl = "/CV_Darkhansukh_Ganburel_Alternance_AIS_Dark.pdf";
 
 export const formation: ParcoursEntry[] = [
   {
