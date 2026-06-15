@@ -26,7 +26,7 @@ export const hero = {
 // Teaser affiché sur la page d'accueil, renvoie vers /infrastructure
 export const infraTeaser = {
   lead:
-    "Du serveur nu au HTTPS A+ : défense en profondeur, segmentation réseau VLAN, supervision temps réel et administration hors-bande. Toute l'architecture est schématisée.",
+    "Du serveur nu au HTTPS A+ : défense en profondeur, segmentation réseau VLAN, identité centralisée (SSO), observabilité métriques + logs et administration hors-bande. Toute l'architecture est schématisée.",
   cta: "Explorer l'architecture",
   href: "/infrastructure",
 };
@@ -36,7 +36,7 @@ export const infraPage = {
   eyebrow: "architecture",
   title: "Infrastructure",
   intro:
-    "Une infrastructure auto-hébergée production-grade : un serveur dédié, un hyperviseur Proxmox, deux environnements isolés, et une administration qui n'expose aucun port sur Internet. Survole — ou touche — un nœud pour voir son rôle et les choix techniques.",
+    "Une infrastructure auto-hébergée production-grade : un serveur dédié, un hyperviseur Proxmox, deux environnements isolés, une identité centralisée (SSO) et une observabilité métriques + logs — le tout administré sans exposer aucun port sur Internet. Survole — ou touche — un nœud pour voir son rôle et les choix techniques.",
 };
 
 // Description de chaque nœud du diagramme d'architecture.
@@ -91,10 +91,16 @@ export const infraNodes = {
       "Ce site. Build statique Next.js servi par Caddy depuis le même environnement de production.",
   },
   supervision: {
-    name: "Supervision",
+    name: "Métriques",
     role: "Prometheus · Grafana · Alertmanager",
     detail:
-      "Conteneur dédié : Prometheus collecte les métriques, Grafana les visualise, Alertmanager déclenche les alertes et les pousse en temps réel sur Telegram.",
+      "Volet métriques : Prometheus collecte les métriques système et applicatives, Grafana les visualise, Alertmanager déclenche les alertes et les pousse en temps réel sur Telegram. Métriques et logs sont réunis dans une seule interface Grafana.",
+  },
+  loki: {
+    name: "Loki",
+    role: "Agrégation de logs · Alloy",
+    detail:
+      "Volet logs : des agents Grafana Alloy (agent OpenTelemetry unifié) collectent les journaux du reverse proxy et du service d'identité ; Loki les centralise. Les logs sont explorés dans Grafana et corrélés aux métriques — observabilité complète.",
   },
   opnsense: {
     name: "OPNsense",
@@ -119,6 +125,12 @@ export const infraNodes = {
     role: "VPN admin chiffré",
     detail:
       "Toute l'administration passe par un réseau maillé WireGuard chiffré. Aucun port d'administration n'est exposé sur Internet : pas de SSH public, aucun panneau ouvert.",
+  },
+  authentik: {
+    name: "Authentik",
+    role: "Fournisseur d'identité · SSO",
+    detail:
+      "Identité centralisée. Une seule authentification (SSO) protège l'accès à Grafana et à l'interface de l'hyperviseur (Proxmox) via OIDC. MFA imposé sur le compte administrateur de l'hyperviseur ; des comptes de secours locaux sont conservés hors SSO pour rétablir l'accès si le fournisseur d'identité est indisponible.",
   },
 } as const;
 
@@ -161,22 +173,52 @@ export const infraSecurity = {
   ],
 };
 
-// Supervision (sous le diagramme)
+// Gestion des accès (sous le diagramme)
+export const infraAccess = {
+  title: "Gestion des accès",
+  intro: "Une identité centralisée, le moindre privilège par défaut.",
+  items: [
+    {
+      name: "SSO centralisé (OIDC)",
+      detail:
+        "Authentik fédère l'authentification : un point d'identité unique pour Grafana et l'interface de l'hyperviseur, via OIDC.",
+    },
+    {
+      name: "MFA administrateur",
+      detail:
+        "Double facteur imposé sur le compte administrateur de l'hyperviseur.",
+    },
+    {
+      name: "Moindre privilège",
+      detail:
+        "Chaque accès est restreint au strict nécessaire — pas de compte partagé tout-puissant.",
+    },
+    {
+      name: "Comptes de secours locaux",
+      detail:
+        "Des accès locaux hors SSO sont conservés pour reprendre la main si le fournisseur d'identité est indisponible.",
+    },
+  ],
+};
+
+// Observabilité — métriques + logs (sous le diagramme)
 export const infraSupervision = {
-  title: "Supervision",
-  intro: "Métriques collectées sur 5 nœuds, alerting temps réel.",
+  title: "Observabilité — métriques + logs",
+  intro: "Métriques, logs et alerting réunis dans une seule interface Grafana.",
   points: [
-    "Prometheus scrape les métriques système et applicatives des 5 nœuds.",
-    "Grafana centralise les tableaux de bord (CPU, RAM, disque, réseau, services).",
-    "Alertmanager déclenche les alertes sur seuils.",
-    "Notifications poussées en temps réel sur Telegram.",
+    "Prometheus scrape les métriques système et applicatives de l'ensemble des nœuds.",
+    "Grafana Alloy — agent OpenTelemetry unifié — collecte les logs du reverse proxy et du service d'identité.",
+    "Loki centralise les logs ; ils sont explorés et corrélés aux métriques dans Grafana.",
+    "Alertmanager déclenche les alertes sur seuils, poussées en temps réel sur Telegram.",
   ],
 };
 
 export const infraBadges = [
   { label: "SSL Labs A+", variant: "teal" as const },
   { label: "Suricata IDS/IPS", variant: "teal" as const },
+  { label: "Authentik SSO", variant: "teal" as const },
   { label: "Prometheus / Grafana", variant: "teal" as const },
+  { label: "Loki / Alloy", variant: "teal" as const },
   { label: "Caddy", variant: "default" as const },
   { label: "VLANs 802.1Q", variant: "default" as const },
   { label: "NAT/LXC", variant: "default" as const },
@@ -221,6 +263,10 @@ export const competences = {
       "Prometheus",
       "Grafana",
       "Alertmanager",
+      "Loki",
+      "Grafana Alloy",
+      "Authentik",
+      "OIDC / SSO",
     ],
   },
   dev: {
@@ -241,8 +287,6 @@ export const competences = {
     items: [
       "Wazuh",
       "Ansible",
-      "Loki",
-      "Authentik",
     ],
   },
 };
