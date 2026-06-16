@@ -1,7 +1,16 @@
 "use client";
 
 import { useId, useState, type ReactNode } from "react";
-import { ChevronDown, Globe, Network, ShieldAlert, BellRing } from "lucide-react";
+import {
+  ChevronDown,
+  Globe,
+  Network,
+  ShieldAlert,
+  BellRing,
+  KeyRound,
+  ScrollText,
+  Waypoints,
+} from "lucide-react";
 import {
   CloudflareIcon,
   HetznerIcon,
@@ -257,28 +266,52 @@ export function ArchitectureDiagram() {
               />
               <Node id="portfolio" icon={<NextjsIcon size={18} />} {...nodeProps} />
             </div>
-            <div className="mt-2">
-              <Node
-                id="supervision"
-                icon={<PrometheusIcon size={18} />}
-                stack={
-                  <>
-                    <MiniIcon title="Prometheus">
-                      <PrometheusIcon size={12} />
-                    </MiniIcon>
-                    <MiniIcon title="Grafana">
-                      <GrafanaIcon size={12} />
-                    </MiniIcon>
-                    <MiniIcon title="Alertmanager">
-                      <BellRing size={12} />
-                    </MiniIcon>
-                    <MiniIcon title="Telegram">
-                      <TelegramIcon size={12} />
-                    </MiniIcon>
-                  </>
-                }
-                {...nodeProps}
-              />
+            {/* Observabilité : métriques + logs, unifiés dans Grafana */}
+            <div className="mt-3 rounded-lg border border-border bg-bg-darker/30 p-3">
+              <div className="mb-2.5 flex items-center justify-between gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-text-hint">
+                  Observabilité
+                </span>
+                <span className="flex items-center gap-1.5 font-mono text-[10px] text-text-hint">
+                  <GrafanaIcon size={11} />
+                  unifié dans Grafana
+                </span>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                <Node
+                  id="supervision"
+                  icon={<PrometheusIcon size={18} />}
+                  stack={
+                    <>
+                      <MiniIcon title="Prometheus">
+                        <PrometheusIcon size={12} />
+                      </MiniIcon>
+                      <MiniIcon title="Alertmanager">
+                        <BellRing size={12} />
+                      </MiniIcon>
+                      <MiniIcon title="Telegram">
+                        <TelegramIcon size={12} />
+                      </MiniIcon>
+                    </>
+                  }
+                  {...nodeProps}
+                />
+                <Node
+                  id="loki"
+                  icon={<ScrollText size={18} />}
+                  stack={
+                    <>
+                      <MiniIcon title="Grafana Alloy (agents OpenTelemetry)">
+                        <Waypoints size={12} />
+                      </MiniIcon>
+                      <MiniIcon title="Grafana">
+                        <GrafanaIcon size={12} />
+                      </MiniIcon>
+                    </>
+                  }
+                  {...nodeProps}
+                />
+              </div>
             </div>
           </div>
 
@@ -301,17 +334,18 @@ export function ArchitectureDiagram() {
 
       <LayerConnector t="admin" label="hors-bande" dashed />
 
-      {/* ── ADMINISTRATION ── */}
-      <LayerLabel>Administration</LayerLabel>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="sm:max-w-sm sm:flex-1">
-          <Node id="tailscale" icon={<TailscaleIcon size={18} />} tone="admin" {...nodeProps} />
-        </div>
-        <p className="font-mono text-xs leading-relaxed text-text-hint">
-          Aucun port d&apos;administration n&apos;est exposé sur Internet — l&apos;accès
-          passe uniquement par le tunnel chiffré.
-        </p>
+      {/* ── ADMINISTRATION & IDENTITÉ ── */}
+      <LayerLabel>Administration &amp; identité</LayerLabel>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Node id="tailscale" icon={<TailscaleIcon size={18} />} tone="admin" {...nodeProps} />
+        <Node id="authentik" icon={<KeyRound size={18} />} tone="admin" {...nodeProps} />
       </div>
+      <p className="mt-3 font-mono text-xs leading-relaxed text-text-hint">
+        Aucun port d&apos;administration n&apos;est exposé sur Internet — l&apos;accès passe
+        par le tunnel chiffré, puis une authentification unique (SSO via OIDC) protège
+        Grafana et l&apos;interface de l&apos;hyperviseur, avec MFA sur le compte
+        administrateur.
+      </p>
     </div>
   );
 }

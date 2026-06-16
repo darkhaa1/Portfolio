@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, ShieldCheck, Activity } from "lucide-react";
+import { ArrowLeft, ExternalLink, ShieldCheck, Activity, KeyRound } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ArchitectureDiagram } from "@/components/infra/ArchitectureDiagram";
@@ -8,6 +8,7 @@ import {
   siteConfig,
   infraPage,
   infraSecurity,
+  infraAccess,
   infraSupervision,
   infraBadges,
   infraRepo,
@@ -16,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "Infrastructure — Darkhansukh G.",
   description:
-    "Architecture d'une infrastructure auto-hébergée production-grade : Cloudflare, Proxmox VE, Caddy, segmentation VLAN OPNsense/Suricata, supervision Prometheus/Grafana et administration hors-bande Tailscale.",
+    "Architecture d'une infrastructure auto-hébergée production-grade : Cloudflare, Proxmox VE, Caddy, segmentation VLAN OPNsense/Suricata, identité centralisée Authentik (SSO/OIDC), observabilité Prometheus/Grafana + Loki/Alloy et administration hors-bande Tailscale.",
   alternates: { canonical: `${siteConfig.url}/infrastructure` },
 };
 
@@ -67,7 +68,7 @@ export default function InfrastructurePage() {
             ))}
           </div>
 
-          {/* Sécurité + supervision */}
+          {/* Sécurité + gestion des accès + observabilité */}
           <div className="mt-16 grid gap-6 lg:grid-cols-2">
             <section className="rounded-xl border border-border bg-surface p-6">
               <div className="mb-5 flex items-center gap-2">
@@ -91,13 +92,33 @@ export default function InfrastructurePage() {
 
             <section className="rounded-xl border border-border bg-surface p-6">
               <div className="mb-5 flex items-center gap-2">
+                <KeyRound size={20} className="text-accent" />
+                <h2 className="text-lg font-semibold">{infraAccess.title}</h2>
+              </div>
+              <p className="mb-5 text-sm text-text-muted">{infraAccess.intro}</p>
+              <ul className="flex flex-col gap-3">
+                {infraAccess.items.map((item) => (
+                  <li key={item.name} className="flex flex-col gap-0.5">
+                    <span className="font-mono text-sm text-text-primary">
+                      {item.name}
+                    </span>
+                    <span className="text-sm leading-relaxed text-text-muted">
+                      {item.detail}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="rounded-xl border border-border bg-surface p-6 lg:col-span-2">
+              <div className="mb-5 flex items-center gap-2">
                 <Activity size={20} className="text-accent" />
                 <h2 className="text-lg font-semibold">{infraSupervision.title}</h2>
               </div>
               <p className="mb-5 text-sm text-text-muted">
                 {infraSupervision.intro}
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="grid gap-3 sm:grid-cols-2">
                 {infraSupervision.points.map((point) => (
                   <li
                     key={point}
