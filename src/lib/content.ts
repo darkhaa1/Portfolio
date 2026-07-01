@@ -16,7 +16,7 @@ export const navLinks = [
 export const hero = {
   badge: "Disponible — alternance AIS · septembre 2026",
   whoami: "Darkhansukh G.",
-  headline: "Je construis et sécurise des infrastructures",
+  headline: "J'installe, je configure, je dépanne — et je documente tout.",
   pitch:
     "Étudiant systèmes, réseaux et cybersécurité — je conçois, déploie et protège des infrastructures auto-hébergées production-grade, du serveur nu au HTTPS A+.",
   selfHostedNote:
