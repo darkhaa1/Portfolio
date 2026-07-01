@@ -14,7 +14,7 @@ export const navLinks = [
 ] as const;
 
 export const hero = {
-  badge: "Disponible — alternance AIS · septembre 2026",
+  badge: "Disponible dès maintenant pour un poste de technicien",
   whoami: "Darkhansukh G.",
   headline: "J'installe, je configure, je dépanne — et je documente tout.",
   pitch:
