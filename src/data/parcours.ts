@@ -12,19 +12,13 @@ export interface ParcoursEntry {
 export const cvUrl = "/CV_Darkhansukh_Ganburel_Alternance_AIS_Dark.pdf";
 
 export const formation: ParcoursEntry[] = [
-  {
-    title: "Bachelor Administrateur d'Infrastructures Sécurisées",
-    place: "Formatik · Saint-Étienne · en alternance recherchée",
-    dates: "09/2026 – 09/2027",
-    status: "targeted",
-    description:
-      "Bachelor BAC+3 (RNCP niveau 6) — administration et sécurisation des infrastructures, cybersécurité.",
-  },
+
   {
     title: "Technicien Supérieur Systèmes, Réseaux et Cybersécurité",
     place: "Studi · e-learning",
-    dates: "03/2026 – en cours",
+    dates: "03/2026 – en cours(examen pervu en novembre 2026)",
     status: "current",
+
     description:
       "Formation Graduate en systèmes, réseaux et cybersécurité.",
   },
